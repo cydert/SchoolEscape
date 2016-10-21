@@ -5,6 +5,7 @@ public class PlayerMove1 : MonoBehaviour {
 	private float speed = 10f;
 	private float rotation = 4f;
 	private string[] key1;
+	private const float GRAVITY = 9.8f;
 	// Use this for initialization
 	void Start () {
 		key1 = new string[4];
@@ -32,6 +33,7 @@ public class PlayerMove1 : MonoBehaviour {
 		}
 
 		//重力
+		//transform.position -= new Vector3(0f, GRAVITY * Time.deltaTime, 0f);
 
 	}
 }
