@@ -2,44 +2,48 @@
 using System.Collections;
 
 public class Door : MonoBehaviour {
-	public bool move = true;
-	public bool isOpen = false;
+	public bool move = true;//動かせるか
+	private bool moving = false;//動作中か
+	private bool isOpen = false;//開いているか
 	private float oldPos = 0;
+
+	private float doorSpeed;
 
 	// Use this for initialization
 	void Start () {
-		Open ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-
-	bool Open(){
-		if (move) {
-			isOpen = true;
-			oldPos = transform.position.x;
-			while (transform.position.x - oldPos <= 1.65f) {
-				transform.position += new Vector3 (0.001f, 0f, 0f) * Time.deltaTime;
+		if (moving && move) {
+			if (isOpen) {//開いているなら
+				if (oldPos- transform.position.x <= 1.65f) {
+					transform.position -= new Vector3 (1.5f, 0f, 0f) * Time.deltaTime;
+				} else {//開 完了
+					isOpen = false;
+					moving = false;
+				}
+			} else {//閉じてれば
+				if (transform.position.x - oldPos <= 1.65f) {
+					transform.position += new Vector3 (1.5f, 0f, 0f) * Time.deltaTime;
+				} else {//閉 完了
+					isOpen = true;
+					moving = false;
+				}
 			}
-			return true;
-		} else {
-			return false;
 		}
 	}
 
-	bool Close(){
+	public bool Open(){
 		if (move) {
-			isOpen = true;
-			oldPos = transform.position.x;
-			while (oldPos - transform.position.x <= 50f) {
-				transform.position -= new Vector3 (2f, 0f, 0f) * Time.deltaTime;
+			if (!moving) {//動作中でなければ
+				oldPos = transform.position.x;
+				moving = true;
 			}
 			return true;
-		} else {
+		}else{
 			return false;
 		}
 	}
-
 }

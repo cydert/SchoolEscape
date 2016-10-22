@@ -26,10 +26,12 @@ public class PlayerMove1 : MonoBehaviour {
 
 		//回転
 		if (Input.GetKey (key1 [2])) {
-			transform.eulerAngles += new Vector3 (0f, rotation*-1, 0f);
+			transform.Rotate (new Vector3 (0f, rotation * -1, 0f));
+			//transform.eulerAngles += new Vector3 (0f, rotation*-1, 0f);
 		}
 		if (Input.GetKey (key1 [3])) {
-			transform.eulerAngles += new Vector3 (0f, rotation, 0f);
+			transform.Rotate (new Vector3 (0f, rotation, 0f));
+			//transform.eulerAngles += new Vector3 (0f, rotation, 0f);
 		}
 
 		//重力
