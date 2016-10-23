@@ -5,6 +5,7 @@ public class PlayerAction : MonoBehaviour {
 	private bool onActionTx = false;//何か表示イベントがあるなら
 	private string viewTx;
 	private string actionKey = "e";
+	private float time;
 	// Use this for initialization
 	void Start () {
 		
@@ -17,7 +18,9 @@ public class PlayerAction : MonoBehaviour {
 		}
 		
 	}
-	void OnCollisionStay(Collision col){
+	//void OnCollisionStay(Collision col){
+	//void OnControllerColliderHit(ControllerColliderHit col){	
+	void OnTriggerStay(Collider col){
 		if (col.gameObject.CompareTag ("move")) {	//動かせるものと触れたら
 			if (col.gameObject.name.Contains ("ドア")) {
 				viewTx = "Eキー";
