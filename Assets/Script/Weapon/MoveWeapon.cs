@@ -23,6 +23,10 @@ public class MoveWeapon : MonoBehaviour {
 			viewTx = "Qキー";
 			if (Input.GetKey (getKey)) {
 				//武器入れ替え
+				//所持武器を捨てる
+				if (Player1.weapon != null) {
+
+				}
 			}
 		}
 	}
