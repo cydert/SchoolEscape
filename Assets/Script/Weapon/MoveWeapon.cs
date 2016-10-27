@@ -41,11 +41,11 @@ public class MoveWeapon : MonoBehaviour {
 				gameObject.transform.parent = pObj.transform;//子として登録
 				Player1.noActiveWeapon = gameObject;
 				gameObject.transform.position = Player1.playerObj.transform.position + new Vector3(0f,upY,0f);
-
-
 				gameObject.SetActive(false);//非表示
 				getCan = false;
 				tmr = new Timer (0.2f);
+
+
 			}
 		}
 
