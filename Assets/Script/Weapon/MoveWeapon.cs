@@ -20,7 +20,7 @@ public class MoveWeapon : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.CompareTag ("Player")) {	//Playerと触れたら
 			getCan = true;
-			viewTx = "Eキー";
+			viewTx = "Qキー";
 			if (Input.GetKey (getKey)) {
 				//武器入れ替え
 			}
