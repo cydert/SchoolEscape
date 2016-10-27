@@ -24,23 +24,30 @@ public class MoveWeapon : MonoBehaviour {
 				//武器入れ替え
 				//所持武器を捨てる
 				if (Player1.weapon != null) {
+					transform.Rotate(new Vector3(0f,0f,0f));
 					Player1.weapon.transform.parent = null;//子解除
 					fin = true;
 					oldObj = Player1.weapon;
-					Debug.Log ("解除");
 				}
+				//武器装備
 				Player1.weapon = gameObject;
 				transform.parent = pObj.transform;//子として登録
+				transform.position = pObj.transform.forward + pObj.transform.forward * locatonForward;//装備場所指定
+				transform.Rotate(new Vector3(0f,0f,45f));
+
 				getCan = false;
 				tmr = new Timer (0.2f);
 			}
 		}
+
+		//終了処理
 		if (fin && tmr.getEndIs()) {
 			fin = false;
 			oldObj.GetComponent<MoveWeapon> ().enabled = true;//置いたオブジェクトのスクリプト有効化
 			this.GetComponent<MoveWeapon>().enabled = false;//このスクリプト無効
 		}
 	}
+
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.CompareTag ("Player")) {	//Playerと触れたら
 			getCan = true;
