@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class Timer : MonoBehaviour {
+// : MonoBehaviour 
+public class Timer{
 	private float start;
 	private float end;
-	Timer(float end){
+	public Timer(float end){
 		start = Time.time;
-		this.end = end;
-	}
-	Timer(float first,float end){
-		this.start = first;
 		this.end = end;
 	}
 	float getTime(){
 		return Time.time - start;
 	}
-	bool getEndIs(){
+	public bool getEndIs(){
 		if (Time.time - start >= end)
 			return true;
 		else

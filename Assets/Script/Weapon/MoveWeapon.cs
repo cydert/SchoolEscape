@@ -4,8 +4,10 @@ using System.Collections;
 public class MoveWeapon : MonoBehaviour {
 	private float angle = 45f;
 	private float locatonForward = 1f;
-	private Timer tmr;
-	private bool getCan = false;
+	private Timer tmr;//時間差スクリプト有効用
+	private bool fin;//最終スクリプト処理をするか
+	private GameObject oldObj;
+	private bool getCan = false;//表示用
 	private string viewTx;
 	private string getKey = "q";
 	public GameObject pObj;
@@ -16,24 +18,33 @@ public class MoveWeapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-	void OnTriggerEnter(Collider col){
-		if (col.gameObject.CompareTag ("Player")) {	//Playerと触れたら
-			getCan = true;
-			viewTx = "Qキー";
+		if (getCan) {
 			if (Input.GetKey (getKey)) {
 				getCan = false;
 				//武器入れ替え
 				//所持武器を捨てる
 				if (Player1.weapon != null) {
 					Player1.weapon.transform.parent = null;//子解除
-					Player1.weapon.GetComponent<MoveWeapon>().enabled = true;
+					fin = true;
+					oldObj = Player1.weapon;
+					Debug.Log ("解除");
 				}
 				Player1.weapon = gameObject;
-				pObj.transform.parent = transform;//子として登録
-				this.GetComponent<MoveWeapon>().enabled = false;//スクリプト無効
+				transform.parent = pObj.transform;//子として登録
+				getCan = false;
+				tmr = new Timer (0.2f);
 			}
+		}
+		if (fin && tmr.getEndIs()) {
+			fin = false;
+			oldObj.GetComponent<MoveWeapon> ().enabled = true;//置いたオブジェクトのスクリプト有効化
+			this.GetComponent<MoveWeapon>().enabled = false;//このスクリプト無効
+		}
+	}
+	void OnTriggerEnter(Collider col){
+		if (col.gameObject.CompareTag ("Player")) {	//Playerと触れたら
+			getCan = true;
+			viewTx = "Qキー";
 		}
 	}
 	void OnTriggerExit(Collider col){
