@@ -11,7 +11,8 @@ public class MoveWeapon : MonoBehaviour {
 	private string viewTx;
 	private string getKey = "q";
 	private GameObject pObj;
-
+    public int weaponNum;
+    public GameObject my;
 	public float upY;//各武器誤差対処用 交換時
 	// Use this for initialization
 	void Start () {
@@ -31,19 +32,22 @@ public class MoveWeapon : MonoBehaviour {
 				//武器入れ替え
 				//所持武器を捨てる
 				if (Player1.noActiveWeapon != null) {
-					Player1.noActiveWeapon.transform.parent = null;//子解除
+					Player1.noActiveWeapon.transform.parent = null;//子解除(地面へ落とす)
 					Player1.noActiveWeapon.SetActive(true);//再表示
 
 					fin = true;
 					oldObj = Player1.noActiveWeapon;
 				}
 				//武器装備
-				gameObject.transform.parent = pObj.transform;//子として登録
+				my.transform.parent = pObj.transform;//子として登録
 				Player1.noActiveWeapon = gameObject;
 				gameObject.transform.position = Player1.playerObj.transform.position + new Vector3(0f,upY,0f);
 				gameObject.SetActive(false);//非表示
-				getCan = false;
-				tmr = new Timer (0.2f);
+
+                //手持ちを表示
+                Player1.weapons[weaponNum].SetActive(true);
+				//getCan = false;
+			    // = new Timer (0.2f);
 
 
 			}
