@@ -118,7 +118,6 @@ public class AttackWeapon2 : MonoBehaviour {
 	}
 	void changeRotationHowAt(){
 		nowRotation = 0f;
-		Debug.Log ("ch:" + howAtNow);
 		if ((int)howAt.UP_Down == howAtNow) {//縦なら
 			howRotation = finalTime/0.3f * 57f;
 
