@@ -7,6 +7,7 @@ TagManager:
   - move
   - wall
   - weapon
+  - Enemy
   layers:
   - Default
   - TransparentFX
